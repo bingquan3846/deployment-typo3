@@ -1,4 +1,0 @@
-.. |img-garbagecollector|     image:: ../../../Images/garbageCollection.png
-.. :align: left
-.. :border: 0
-.. :name: garbagecollector

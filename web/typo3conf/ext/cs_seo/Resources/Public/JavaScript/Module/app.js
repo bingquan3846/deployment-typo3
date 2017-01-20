@@ -1,1 +1,0 @@
-var csSeoApp = angular.module('csSeo', ['ui.grid', 'ui.grid.resizeColumns', 'ui.grid.moveColumns', 'ui.grid.treeView', 'ui.grid.edit', 'ui.grid.cellNav', 'ui.bootstrap']);
