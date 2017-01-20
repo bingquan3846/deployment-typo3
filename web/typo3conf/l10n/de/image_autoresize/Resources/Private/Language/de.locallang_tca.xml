@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3locallangExt>
+  <data type="array">
+    <languageKey index="de" type="array">
+			<label index="tx_imageautoresize.directories">Verzeichnisse:</label>
+			<label index="tx_imageautoresize.file_types">Abbildtypen:</label>
+			<label index="tx_imageautoresize.threshold">Größe Schwelle:</label>
+			<label index="tx_imageautoresize.max_width">Maximale Breite:</label>
+			<label index="tx_imageautoresize.max_height">Maximale Höhe:</label>
+			<label index="tx_imageautoresize.auto_orient">Automatische Ausrichtung</label>
+			<label index="tx_imageautoresize.keep_metadata"/>
+			<label index="tx_imageautoresize.keep_metadata.inherit"/>
+			<label index="tx_imageautoresize.keep_metadata.yes">Ja</label>
+			<label index="tx_imageautoresize.keep_metadata.no">Nein</label>
+			<label index="tx_imageautoresize.resize_png_with_alpha"/>
+			<label index="tx_imageautoresize.conversion_mapping"/>
+			<label index="tx_imageautoresize.rulesets">Regeln</label>
+			<label index="tx_imageautoresize.title">Titel:</label>
+			<label index="tx_imageautoresize.usergroup_ruleset"/>
+			<label index="tabs.options">Optionen</label>
+			<label index="tabs.rulesets">Regeln</label>
+		</languageKey>
+  </data>
+</T3locallangExt>

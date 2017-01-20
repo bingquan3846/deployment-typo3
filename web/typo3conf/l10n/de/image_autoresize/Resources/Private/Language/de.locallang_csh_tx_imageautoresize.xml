@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3locallangExt>
+  <data type="array">
+    <languageKey index="de" type="array">
+			<label index="directories.description"/>
+			<label index="file_types.description"/>
+			<label index="threshold.description"/>
+			<label index="max_width.description"/>
+			<label index="max_height.description"/>
+			<label index="auto_orient.description"/>
+			<label index="keep_metadata.description"/>
+			<label index="resize_png_with_alpha.description"/>
+			<label index="conversion_mapping.description"/>
+			<label index="rulesets.description"/>
+		</languageKey>
+  </data>
+</T3locallangExt>

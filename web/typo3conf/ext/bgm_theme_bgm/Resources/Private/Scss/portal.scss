@@ -1,0 +1,92 @@
+@import "Imports/global";
+@import "Imports/colors";
+@import "Imports/page";
+@import "Imports/font";
+@import "Imports/top";
+@import "Imports/bottom";
+@import "Imports/columns";
+@import "Imports/buttons";
+
+#navigationbar {
+	display:none;
+}
+.footernavigation {
+	padding-top: 4px;
+}
+#content {
+	background-color: #cccccc;
+
+	background: url(/fileadmin/files/images/startbg.jpg) no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+	background-size: cover;
+	@include breakpoint($medium) {
+		padding-top:50px;
+		min-height:600px;
+	}
+	@include breakpoint($large) {
+		padding-top:150px;
+	}
+}
+a.normalbutton {
+	font-size: 13px;
+	line-height: 20px;
+	font-weight: 400;
+	padding: 4px 20px;
+	margin: 5px 0;
+	@include breakpoint($large) {
+		font-size: 14px;
+	}
+}
+
+#topbar a.socialmedialink {
+	display:none;
+	@include breakpoint($medium) {
+		display:inline-block;
+	}
+}
+.third {
+	position: relative;
+	&:before {
+		content: " ";
+		background-color:#fff;
+		opacity: 0.8;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left:0;
+		top:0;
+	}
+	.ce {
+		text-align:center;
+		padding:20px;
+		padding-top:35px;
+		padding-bottom: 0;
+		position:relative;
+		height:100%;
+		p{
+			line-height: 20px;
+		}
+	}
+}
+.thirdSecond {
+	a.normalbutton {
+		background-color:#b10034;
+		&:hover {
+			background-color:#fff;
+			border: 2px #b10034 solid;
+			color:#b10034;
+		}
+	}
+}
+.thirdThird {
+	a.normalbutton {
+		background-color:#011e56;
+		&:hover {
+			background-color:#fff;
+			border: 2px #011e56 solid;
+			color:#011e56;
+		}
+	}
+}

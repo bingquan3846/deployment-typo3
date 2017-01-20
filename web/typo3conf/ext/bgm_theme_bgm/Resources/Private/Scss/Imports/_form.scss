@@ -1,0 +1,209 @@
+fieldset {
+	padding:0;
+	margin:0;
+	border:none;
+	legend {
+		display: none;
+	}
+}
+.tx-powermail h3 {
+	display:none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+textarea, select {
+    background-color: #f2f2f2;
+    border-radius: 0;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0), 0 1px 0 rgba(0, 0, 0, 0.08) inset;
+    color: #444444;
+    padding: 8px 12px;
+    transition: all 0.3s ease 0s;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], select {
+    height: 40px;
+    vertical-align: top;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], textarea, select {
+    border: medium none;
+    line-height: 1.5em;
+    padding: 8px;
+    width: 83%;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="search"]:focus,
+textarea:focus, select:focus {
+    box-shadow: 0 0 0 2px $coporateColor;
+}
+
+
+.powermail_fieldwrap .inputIcon::before {
+	font-family: 'webfont';
+	display: block;
+    font-size: 22px;
+    left: 0;
+    line-height: 40px;
+    opacity: 0.33;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    top: 6px;
+    /*transition: opacity 0.3s ease 0s, color 0.3s ease 0s;*/
+    width: 50px;
+}
+.powermail_fieldwrap .inputIcon.type-name::before {
+	content: "\e901";
+}
+.powermail_fieldwrap .inputIcon.type-e_mail::before {
+	content: "\f003"
+}
+.powermail_fieldwrap .inputIcon.type-ihrenachricht::before {
+	content: "\e900";
+	top:3px;
+}
+
+.powermail_fieldwrap input[type="text"]:focus + span,
+.powermail_fieldwrap input[type="email"]:focus + span,
+.powermail_fieldwrap textarea:focus + span{
+	color:$coporateColor;
+	opacity: 1;
+}
+.powermail_fieldwrap_submit input[type="submit"] {
+	font-size: 15px;
+	line-height: 20px;
+	font-weight: 700;
+	padding: 10px 36px;
+	margin: 5px 0;
+	border: none;
+	display: inline-block;
+	overflow: hidden;
+	transition: background-color 0.5s ease;
+	background-color:$coporateColor;
+	color:#fff;
+	&:hover {
+		background-color:$coporateColorDark;
+		text-decoration: none;
+	}
+}
+
+/* w-form */
+.powermail_fieldwrap {
+	padding: 0 0 16px;
+}
+
+.powermail_fieldwrap.for_submit {
+	padding: 0;
+}
+
+.powermail_fieldwrap.for_links {
+	padding: 8px 0 0;
+}
+
+.powermail_label {
+	display: none;
+	margin: 0 0 6px;
+}
+
+
+
+.powermail_fieldwrap {
+	position: relative;
+}
+
+.powermail_fieldwrap > input[type="text"],
+.powermail_fieldwrap > input[type="password"],
+.powermail_fieldwrap > input[type="email"],
+.powermail_fieldwrap > textarea,
+.powermail_fieldwrap > select {
+	padding-left: 50px;
+}
+
+#captcha_row .powermail_fieldwrap > input[type="text"] {
+	padding-left: 12px;
+}
+
+.powermail_fieldwrap > i {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 20px;
+	text-align: center;
+	line-height: 40px;
+	width: 50px;
+	opacity: 0.33;
+	pointer-events: none;
+	-webkit-transition: opacity 0.3s, color 0.3s;
+	transition: opacity 0.3s, color 0.3s;
+	color: #444; /* variable */
+}
+
+.powermail_fieldwrap > input:focus + i,
+.powermail_fieldwrap > textarea:focus + i {
+	opacity: 1;
+	color: #c20; /* variable */
+}
+
+.w-form-state {
+	font-size: 14px;
+	line-height: 24px;
+	color: red;
+}
+
+.powermail_fieldwrap.for_submit .g-btn {
+	margin: 0;
+}
+
+.powermail_fieldwrap.for_submit .g-btn i {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 26px;
+	line-height: 30px;
+	height: 30px;
+	width: 30px;
+	margin: -15px 0 0 -15px;
+}
+
+.powermail_fieldwrap.for_submit .g-btn.loading i {
+	display: block;
+}
+
+.powermail_fieldwrap.for_submit .g-btn.loading span {
+	opacity: 0;
+}
+
+.powermail_fieldwrap-success {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 18px;
+	line-height: 26px;
+	padding: 12px;
+	color: #4c0;
+}
+
+.w-form.align_center .powermail_fieldwrap-success {
+	display: block;
+	padding-bottom: 0;
+}
+
+.w-form.align_right .powermail_fieldwrap-success {
+	display: block;
+	padding-bottom: 0;
+	padding-right: 0;
+}
+
