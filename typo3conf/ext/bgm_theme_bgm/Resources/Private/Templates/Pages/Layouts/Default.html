@@ -1,0 +1,54 @@
+	<!-- TOP begin //-->
+	<div id="top">
+		<div id="topbar">
+			<div class="page_wrap row padding">
+					<div class="half topbarleft">
+						<f:cObject typoscriptObjectPath="lib.telephone"/>
+						<f:cObject typoscriptObjectPath="lib.email"/>
+					</div>
+					<div class="half topbarright">
+						<f:cObject typoscriptObjectPath="lib.topbarRight"/>
+					</div>
+
+			</div>
+		</div>
+		<div id="navigationbar">
+			<div class="page_wrap padding">
+				<div id="logo">
+					<f:cObject typoscriptObjectPath="lib.siteLogoNormal"/>
+				</div>
+				<div class="mobile_nav_control" id="mobileNavTrigger"></div>
+				<nav class="mainnavigation">
+					<f:cObject typoscriptObjectPath="lib.mainnavigation"/>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- TOP end //-->
+
+
+
+	<div id="content">
+	<!--TYPO3SEARCH_begin-->
+		{Stage->f:format.html(parseFuncTSPath: '')}
+		{Content->f:format.html(parseFuncTSPath: '')}
+	<!--TYPO3SEARCH_end-->
+	</div>
+
+	<f:cObject typoscriptObjectPath="lib.breadcrumbNavigation"/>
+
+	<f:cObject typoscriptObjectPath="lib.contactElement"/>
+	<f:cObject typoscriptObjectPath="lib.staticFooter"/>
+
+	<div id="bottom">
+		<div class="page_wrap padding">
+			<div class="footernavigation">
+				<f:cObject typoscriptObjectPath="lib.footernavigation"/>
+			</div>
+			<div class="copyright">
+				<f:cObject typoscriptObjectPath="lib.copyright"/>
+			</div>
+		</div>
+	</div>
+
+

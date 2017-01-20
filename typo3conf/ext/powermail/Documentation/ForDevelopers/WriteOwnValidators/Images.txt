@@ -1,0 +1,11 @@
+.. |img-serversidevalidation|     image:: ../../Images/serversidevalidation.png
+   :width: 587
+.. :align: left
+.. :border: 0
+.. :name: serversidevalidation
+
+.. |img-clientsidevalidation|     image:: ../../Images/clientsidevalidation.png
+   :width: 587
+.. :align: left
+.. :border: 0
+.. :name: clientsidevalidation

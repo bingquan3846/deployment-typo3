@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: http://typo3.bgm-gmbh.de/sitemap.xml

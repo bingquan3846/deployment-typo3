@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3locallangExt>
+  <data type="array">
+    <languageKey index="de" type="array">
+			<label index="saveConfiguration">Konfiguration speichern</label>
+			<label index="saveCloseConfiguration">Konfiguration speichern und schließen</label>
+			<label index="closeConfiguration">Konfiguration schließen</label>
+			<label index="extension.ai">.ai - Adobe Illustrator</label>
+			<label index="extension.bmp">.bmp - Windows OS/2 Bitmap Graphics</label>
+			<label index="extension.gif">.gif - Graphic Interchange Format</label>
+			<label index="extension.jpg">.jpg - JPEG/JIFF Image</label>
+			<label index="extension.jpeg">.jpeg - JPEG/JIFF Image</label>
+			<label index="extension.pcx">.pcx - Paintbrush Bitmap Graphic</label>
+			<label index="extension.png">.png - Portable Network Graphic</label>
+			<label index="extension.tga">.tga - Truevision Targa Graphic</label>
+			<label index="extension.tif">.tif - Tagged Image Format</label>
+			<label index="extension.tiff">.tiff - Tagged Image Format</label>
+			<label index="message.emptyConfiguration">Erweiterung image_autoresize ist nicht richtig konfiguriert!</label>
+			<label index="message.imageTransparent">Bild %s wurde nicht angepasst, weil Transparenz erkannt wurde.</label>
+			<label index="message.imageAnimated"/>
+			<label index="message.imageResized">Bild %s wurde automatisch zu %sx%s pixels verkleinert.</label>
+			<label index="message.imageResizedAndRenamed">Bild %s wurde automatisch zu %sx%s verkleinert und als %s umbenannt.</label>
+			<label index="message.imageNotWritable">Bild %s kann nicht geändert werden, da die Datei schreibgeschützt ist.</label>
+		</languageKey>
+  </data>
+</T3locallangExt>

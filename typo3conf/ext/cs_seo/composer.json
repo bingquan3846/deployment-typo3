@@ -1,0 +1,30 @@
+{
+  "name": "clickstorm/cs_seo",
+  "type": "typo3-cms-extension",
+  "description": "[clickstorm] SEO",
+  "homepage": "http://www.clickstorm.de",
+  "license": [
+	"GPL-2.0+"
+  ],
+  "keywords": [
+	"typo3",
+	"cms",
+	"clickstorm",
+	"SEO"
+  ],
+  "version": "1.7.0",
+  "replace": {
+	"cs_seo": "*"
+  },
+  "require": {
+	"typo3/cms": ">=6.2.0"
+  },
+  "suggest": {
+	"typo3-ter/realurl": "*"
+  },
+  "autoload": {
+	"psr-4": {
+	  "Clickstorm\\CsSeo\\": "Classes/"
+	}
+  }
+}

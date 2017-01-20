@@ -1,0 +1,131 @@
+.mobile_nav_control {
+	float: right;
+	display: block;
+	font-size: 28px;
+	text-align: center;
+	margin-top:36px;
+	/*margin-right: ($pageWrapperPaddingLeft) + ($pageWrapperPaddingRight);*/
+	cursor: pointer;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+	&:before {
+		content: '\f0c9';
+		font-family: 'webfont';
+		vertical-align: top;
+	}
+	&:after {
+		content: 'Menu';
+		font-size:18px;
+		vertical-align: top;
+	}
+	@include breakpoint($medium) {
+		display: none;
+	}
+}
+
+
+
+.mainnavigation {
+	display:none;
+	float:none;
+	clear:both;
+	padding-top:30px;
+	@include breakpoint($medium) {
+		display: inline;
+		float: right;
+		clear:none;
+		padding-top: 0;
+	}
+	ul {
+		padding:0;
+		margin:0;
+		li {
+			width:100%;
+			display: block;
+			width: auto;
+			box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06) inset;
+			transition: background-color 0.5s ease;
+			background-color: white;
+			@include breakpoint($medium) {
+				border-top:none;
+				line-height: 120px;
+				float: left;
+				display: inline;
+			}
+			a {
+				padding-bottom: 3px;
+				font-size: 16px;
+				color:#424242;
+				display:block;
+				height:100%;
+				width:100%;
+				padding:15px 15px;
+				@include breakpoint($medium) {
+					padding:0 15px;
+				}
+				&:hover {
+					text-decoration: none;
+					@include breakpoint($medium) {
+						text-decoration: underline;
+					}
+				}
+			}
+			&:hover {
+				background-color: $coporateColor;
+				text-decoration: none;
+				a {
+					color: #fff;
+
+
+				}
+			}
+		}
+	}
+}
+
+.mainnavigation.active {
+	display:block;
+	padding-top: 20px;
+	@include breakpoint($medium) {
+		padding-top:0;
+	}
+}
+
+
+/*the mobile Navigation*/
+nav.mobileNav {
+	-webkit-transform: translate3d(0, -321px, 0);
+	-moz-transform: translate3d(0, -321px, 0);
+	-o-transform: translate3d(0, -321px, 0);
+	transform: translate3d(0, -321px, 0);
+	-webkit-transition: -webkit-transform 0.25s linear;
+	-moz-transition: -moz-transform 0.25s linear;
+	-o-transition: -o-transform 0.25s linear;
+	transition: transform 0.25s linear;
+	height:0;
+	ul{
+		padding-left:20px;
+		@include breakpoint($medium) {
+			display: none;
+		}
+	}
+}
+
+nav.mobileNav.active {
+	-webkit-transform: translate3d(0, 0px, 0);
+	-moz-transform:translate3d(0, 0px, 0);
+	-o-transform:translate3d(0, 0px, 0);
+	transform:translate3d(0, 0px, 0);
+	height:auto;
+}
+
+/* Fallbacks */
+.no-csstransforms .top {
+	position: static;
+}
+.no-csstransforms .mobileNav{
+	display: none;
+}
+.no-csstransforms .mobileNav.active nav {
+	display: block;
+}

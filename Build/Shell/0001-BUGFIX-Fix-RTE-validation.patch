@@ -1,0 +1,127 @@
+From 8ba64710883a2b24cda51ae3d8cb10c4876dbc23 Mon Sep 17 00:00:00 2001
+From: Marco Huber <mail@marco-huber.de>
+Date: Mon, 12 Dec 2016 13:44:46 +0100
+Subject: [PATCH] [BUGFIX] Fix RTE validation
+
+1. Add validation rules to textarea only if needed.
+
+2. Trigger change event of textarea and not validation. The framework
+will trigger the validation if necessary.
+
+3. Add little delay to prevent multiple validations while still updating
+the RTE dom, f.e. during heavy paste actions.
+
+Resolves: #78918
+Related: #70246
+Releases: master,7.6
+Change-Id: I5db0f7f6198644ec65a9106af8b267204901eac2
+---
+ .../Classes/Form/Element/RichTextElement.php       | 40 ++++++++++++++++++++--
+ .../Public/JavaScript/HTMLArea/Editor/Editor.js    | 19 ++++++++--
+ 2 files changed, 53 insertions(+), 6 deletions(-)
+
+diff --git a/typo3/sysext/rtehtmlarea/Classes/Form/Element/RichTextElement.php b/typo3/sysext/rtehtmlarea/Classes/Form/Element/RichTextElement.php
+index 0895138..4d2588b 100644
+--- a/typo3/sysext/rtehtmlarea/Classes/Form/Element/RichTextElement.php
++++ b/typo3/sysext/rtehtmlarea/Classes/Form/Element/RichTextElement.php
+@@ -334,6 +334,42 @@ class RichTextElement extends AbstractFormElement
+         //	_TRANSFORM_vDEF (constant string) in case the RTE is within a flex form
+         $triggerFieldName = preg_replace('/\\[([^]]+)\\]$/', '[_TRANSFORM_\\1]', $itemFormElementName);
+ 
++        // copied from InputTextElement and optimized
++        $attributes = [];
++        $evalList = GeneralUtility::trimExplode(',', $this->data['parameterArray']['fieldConf']['config']['eval'], true);
++        foreach ($evalList as $func) {
++            if ($func !== 'required') {
++                // @todo: This is ugly: The code should find out on it's own whether a eval definition is a
++                // @todo: keyword like "date", or a class reference. The global registration could be dropped then
++                // Pair hook to the one in \TYPO3\CMS\Core\DataHandling\DataHandler::checkValue_input_Eval()
++                // There is a similar hook for "evaluateFieldValue" in DataHandler and InputTextElement
++                if (isset($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][$func])) {
++                    if (class_exists($func)) {
++                        $evalObj = GeneralUtility::makeInstance($func);
++                        if (method_exists($evalObj, 'deevaluateFieldValue')) {
++                            $_params = [
++                                'value' => $this->data['parameterArray']['itemFormElValue']
++                            ];
++                            $this->data['parameterArray']['itemFormElValue'] = $evalObj->deevaluateFieldValue($_params);
++                        }
++                    }
++                }
++            }
++        }
++        $paramsList = [
++            'field' => $this->data['parameterArray']['itemFormElName'],
++            'evalList' => implode(',', $evalList),
++            'is_in' => trim($this->data['parameterArray']['fieldConf']['config']['is_in']),
++        ];
++        $attributes['data-formengine-validation-rules'] = $this->getValidationDataAsJsonString($this->data['parameterArray']['fieldConf']['config']);
++        $attributes['data-formengine-input-params'] = json_encode($paramsList);
++        $attributes['data-formengine-input-name'] = htmlspecialchars($this->data['parameterArray']['itemFormElName']);
++        // Build the attribute string
++        $attributeString = '';
++        foreach ($attributes as $attributeName => $attributeValue) {
++            $attributeString .= ' ' . $attributeName . '="' . htmlspecialchars($attributeValue) . '"';
++        }
++
+         $value = $this->transformDatabaseContentToEditor($this->data['parameterArray']['itemFormElValue']);
+ 
+         $result = [];
+@@ -343,9 +379,7 @@ class RichTextElement extends AbstractFormElement
+         $result[] =    $this->getLanguageService()->sL('LLL:EXT:rtehtmlarea/Resources/Private/Language/locallang.xlf:Please wait');
+         $result[] = '</div>';
+         $result[] = '<div id="editorWrap' . $this->domIdentifier . '" class="editorWrap" style="visibility: hidden; width:' . $editorWrapWidth . '; height:100%;">';
+-        $result[] =    '<textarea ' . $this->getValidationDataAsDataAttribute($this->data['parameterArray']['fieldConf']['config']) . ' id="RTEarea' . $this->domIdentifier . '" name="' . htmlspecialchars($itemFormElementName) . '" rows="0" cols="0" style="' . htmlspecialchars($rteDivStyle) . '">';
+-        $result[] =        htmlspecialchars($value);
+-        $result[] =    '</textarea>';
++        $result[] =    '<textarea ' . $attributeString . ' id="RTEarea' . $this->domIdentifier . '" name="' . htmlspecialchars($itemFormElementName) . '" rows="0" cols="0" style="' . htmlspecialchars($rteDivStyle) . '">' . htmlspecialchars($value) . '</textarea>';
+         $result[] = '</div>';
+ 
+         return implode(LF, $result);
+diff --git a/typo3/sysext/rtehtmlarea/Resources/Public/JavaScript/HTMLArea/Editor/Editor.js b/typo3/sysext/rtehtmlarea/Resources/Public/JavaScript/HTMLArea/Editor/Editor.js
+index b079d8b..ec05544 100644
+--- a/typo3/sysext/rtehtmlarea/Resources/Public/JavaScript/HTMLArea/Editor/Editor.js
++++ b/typo3/sysext/rtehtmlarea/Resources/Public/JavaScript/HTMLArea/Editor/Editor.js
+@@ -121,6 +121,11 @@ define(['TYPO3/CMS/Rtehtmlarea/HTMLArea/UserAgent/UserAgent',
+ 		 * The DomNode object
+ 		 */
+ 		this.domNode = null;
++
++		/**
++		 * Flag to set to true when the dom modified timeout is running
++		 */
++		this.domModifiedTimeoutIsRunning = false;
+ 	};
+ 
+ 	/**
+@@ -290,7 +295,6 @@ define(['TYPO3/CMS/Rtehtmlarea/HTMLArea/UserAgent/UserAgent',
+ 		 */
+ 		Event.trigger(this, 'HtmlAreaEventEditorReady');
+ 		this.appendToLog('HTMLArea.Editor', 'onFrameworkReady', 'Editor ready.', 'info');
+-		this.onDOMSubtreeModified();
+ 	};
+ 
+ 	/**
+@@ -584,8 +588,17 @@ define(['TYPO3/CMS/Rtehtmlarea/HTMLArea/UserAgent/UserAgent',
+ 	 * @param {Event} event
+ 	 */
+ 	Editor.prototype.onDOMSubtreeModified = function(event) {
+-		this.textArea.value = this.getHTML().trim();
+-		FormEngine.Validation.validate();
++		if(!this.domModifiedTimeoutIsRunning){
++			this.domModifiedTimeoutIsRunning = true;
++			var self = this;
++			window.setTimeout(function () {
++				if (self.textArea.value !== self.getHTML()) {
++					self.textArea.value = self.getHTML();
++					Event.trigger(self.textArea, 'change');
++				}
++				self.domModifiedTimeoutIsRunning = false;
++			}, 100);
++		}
+ 	};
+ 
+ 
+-- 
+2.5.0
+
