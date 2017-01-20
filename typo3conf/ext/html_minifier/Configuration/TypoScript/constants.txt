@@ -1,6 +1,0 @@
-plugin.tx_htmlminifier {
-	settings {
-		# cat=plugin.tx_htmlminifier//a; type=string; label=Dont minify pids (comma separated)
-		ignorePids = 
-	}
-}

@@ -1,2 +1,0 @@
-# cat=basic/11; type=string; label=tinypng API Key
-tinypngApiKey=

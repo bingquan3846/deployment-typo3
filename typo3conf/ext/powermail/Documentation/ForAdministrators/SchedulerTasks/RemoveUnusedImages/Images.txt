@@ -1,4 +1,0 @@
-.. |img-schedulertask|     image:: ../../../Images/schedulertask.png
-.. :align: left
-.. :border: 0
-.. :name: schedulertask

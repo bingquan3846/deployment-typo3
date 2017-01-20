@@ -1,1 +1,0 @@
-page.includeCSS.styles = EXT:bgm_theme_bgm/Resources/Public/Css/itmanagement.css
