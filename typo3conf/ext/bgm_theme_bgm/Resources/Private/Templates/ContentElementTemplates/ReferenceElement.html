@@ -1,0 +1,22 @@
+<div class="w-portfolio-item">
+	<div class="w-portfolio-item-h">
+		<f:link.page pageUid="{data.header_link}" class="w-portfolio-item-anchor">
+			<div class="w-portfolio-item-image">
+				<f:if condition="{data.image}">
+					<f:then>
+						<f:cObject typoscriptObjectPath="lib.referenceImage" data="{uid:data.uid}"/>
+					</f:then>
+					<f:else><img alt="{data.header}" src="/typo3conf/ext/bgm_theme_bgm/Resources/Public/Images/Dummy/500x500.gif" class=""></f:else>
+					</f:if>
+
+			</div>
+			<div class="w-portfolio-item-meta">
+				<div class="w-portfolio-item-meta-h">
+					<h2 class="w-portfolio-item-title">{data.header}</h2>
+					<span class="w-portfolio-item-text">{data.subheader}</span>
+					<span class="w-portfolio-item-arrow"></span>
+				</div>
+			</div>
+		</f:link.page>
+	</div>
+</div>

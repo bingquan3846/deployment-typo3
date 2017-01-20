@@ -1,0 +1,73 @@
+/*
+<div class="bigbutton"><a href="/kontakt/"><span class="icon-envelope-o"></span>Kontakt</a></div>
+*/
+
+
+/* Buttons */
+a.normalbutton {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	padding: 4px 20px;
+	margin: 5px 0;
+	border: none;
+	display: inline-block;
+	overflow: hidden;
+	transition: background-color 0.5s ease;
+	-webkit-background-clip: no-clip;
+	-moz-background-clip: no-clip;
+	background-color:$coporateColor;
+	border: 2px #fff solid;
+	color:#fff;
+	&:hover {
+		background-color:#fff;
+		border: 2px $coporateColor solid;
+		color:$coporateColor;
+		text-decoration: none;
+	}
+}
+
+
+.bigbutton a {
+	font-size: 15px;
+	line-height: 20px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 10px 36px;
+	margin: 5px 0;
+	border: none;
+	display: inline-block;
+	overflow: hidden;
+	transition: background-color 0.5s ease;
+	border: 2px $coporateColor solid;
+	&:hover {
+		background-color:$coporateColor;
+		color:#fff;
+		text-decoration: none;
+	}
+	span {
+		display: inline-block;
+		padding-right:3px;
+	}
+}
+
+.four_twelve_right {
+	.bigbutton {
+		@include breakpoint($medium) {
+			float:right;
+			margin-right: 5px;
+		}
+
+	}
+}
+
+
+/* Buttons */
+.full.coporate .bigbutton a {
+	border:2px #fff solid;
+	&:hover {
+		background-color:#fff;
+		color:$coporateColor;
+	}
+
+}

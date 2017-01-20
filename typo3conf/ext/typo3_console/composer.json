@@ -1,0 +1,114 @@
+{
+    "name": "helhum/typo3-console",
+    "description": "A reliable and powerful command line interface for TYPO3 CMS",
+    "keywords": [
+        "TYPO3",
+        "cli",
+        "console",
+        "command",
+        "commandline"
+    ],
+    "homepage": "http://insight.helhum.io/post/104528981610/about-the-beauty-and-power-of-typo3-console",
+    "support": {
+        "issues": "https://github.com/TYPO3-Console/typo3_console/issues"
+    },
+    "authors": [
+        {
+            "name": "Helmut Hummel",
+            "email": "info@helhum.io",
+            "role": "Developer",
+            "homepage": "http://helhum.io"
+        }
+    ],
+    "license": "GPL-2.0+",
+    "require": {
+        "ext-Phar": "*",
+        "php": ">=5.5.0",
+        "helhum/typo3-console-plugin": "^1.5.0",
+
+        "typo3/cms-backend": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-core": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-extbase": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-extensionmanager": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-fluid": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-install": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-saltedpasswords": "^7.6 || >=8.0.0 <8.5",
+        "typo3/cms-scheduler": "^7.6 || >=8.0.0 <8.5",
+
+        "symfony/console": "^2.7 || ^3.0",
+        "symfony/process": "^2.7 || ^3.0"
+    },
+    "require-dev": {
+        "namelesscoder/typo3-repository-client": "^1.2.0",
+        "mikey179/vfsStream": "~1.6.0",
+        "phpunit/phpunit": "~4.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Helhum\\Typo3Console\\": [
+                "Classes/",
+                "Resources/Private/ExtensionArtifacts/src/"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Helhum\\Typo3Console\\Tests\\": "Tests/",
+            "Helhum\\Typo3Console\\": "Resources/Private/CommandReference/src/",
+            "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
+        }
+    },
+    "replace": {
+        "typo3_console": "self.version",
+        "typo3-ter/typo3-console": "self.version"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "bin": [
+        "Scripts/typo3cms"
+    ],
+    "scripts": {
+        "set-version": [
+            "Helhum\\Typo3Console\\Composer\\InstallerScripts::setVersion"
+        ],
+        "extension-copy-artifacts": [
+            "cp -f Resources/Private/ExtensionArtifacts/ext_* ."
+        ],
+        "extension-create-libs": [
+            "mkdir -p Libraries/temp",
+            "[ -f $HOME/.composer/vendor/bin/phar-composer ] || composer global require clue/phar-composer",
+            "if [ ! -f Libraries/symfony-process.phar ]; then cd Libraries/temp && composer require symfony/process=~2.7.0 && composer config classmap-authoritative true && composer config prepend-autoloader false && composer dump-autoload; fi",
+            "[ -f Libraries/symfony-process.phar ] || $HOME/.composer/vendor/bin/phar-composer build Libraries/temp/ Libraries/symfony-process.phar",
+            "chmod -x Libraries/*.phar",
+            "rm -rf Libraries/temp"
+        ],
+        "extension-build": [
+            "@extension-create-libs",
+            "@extension-copy-artifacts"
+        ],
+        "extension-release": [
+            "@extension-build",
+            "rm Resources/Private/ExtensionArtifacts/ext_*",
+            "rm -rf Tests/",
+            "rm -rf Resources/Private/CommandReference/"
+        ],
+        "extension-clean": [
+            "rm -rf Libraries",
+            "rm -f ext_*"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.x-dev"
+        },
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web",
+            "Package": {
+                "partOfMinimalUsableSystem": true
+            }
+        }
+    }
+}
