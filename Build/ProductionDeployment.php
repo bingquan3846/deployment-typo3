@@ -15,8 +15,8 @@ $workflow = new \TYPO3\Surf\Domain\Model\SimpleWorkflow();
 $deployment->setWorkflow($workflow);
 
 /**
-- * Set symlinks to typo3_src
-- */
+ * Set symlinks to typo3_src
+ */
 $setsymlinkstypo3srcOptions = array(
     'command' => '
                 ln -s /var/www/html/typo3_src-7.6.15  {releasePath}/typo3_src',
