@@ -1,0 +1,116 @@
+rootPageId: 534
+base: /
+baseVariants: {  }
+languages:
+  -
+    title: Deutsch
+    enabled: true
+    languageId: '0'
+    base: /
+    typo3Language: de
+    locale: de_DE.UTF-8
+    iso-639-1: de
+    navigationTitle: de
+    hreflang: de-de
+    direction: ltr
+    flag: de
+errorHandling:
+  -
+    errorCode: '404'
+    errorHandler: Page
+    errorContentSource: 't3://page?uid=574'
+routes: {  }
+routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    default: '/'
+    index: 'home'
+    map:
+      '/': 0
+      sitemap.xml: 1533906435
+  DatePlugin:
+    type: Extbase
+    limitToPages:
+      - 551
+      - 539
+    extension: EpxSeminars
+    plugin: Seminars
+    routes:
+      -
+        routePath: '/{date_title}'
+        _controller: 'Date::show'
+        _arguments:
+          date_title: date
+    defaultController: 'Date::show'
+    aspects:
+      date_title:
+        type: UniqueAlias
+        tableName: tx_epxseminars_domain_model_date
+        aliasField: 'title'
+        expires: '15d'
+        uniqueConfiguration:
+          fallbackCharacter: '-'
+  SeminarPlugin:
+    type: Extbase
+    limitToPages:
+      - 626
+      - 627
+    extension: EpxSeminars
+    plugin: Seminars
+    routes:
+      -
+        routePath: '/{seminar_title}'
+        _controller: 'Seminar::show'
+        _arguments:
+          seminar_title: seminar
+    defaultController: 'Seminar::show'
+    aspects:
+      seminar_title:
+        type: UniqueAlias
+        tableName: tx_epxseminars_domain_model_seminar
+        aliasField: 'title'
+        expires: '15d'
+        uniqueConfiguration:
+          fallbackCharacter: '-'
+  SeminarListPlugin:
+    type: Extbase
+    limitToPages:
+      - 540
+    extension: EpxSeminars
+    plugin: Seminars
+    routes:
+      -
+        routePath: '/{category_title}'
+        _controller: 'Seminar::list'
+        _arguments:
+          category_title: category
+    defaultController: 'Seminar::list'
+    aspects:
+      category_title:
+        type: UniqueAlias
+        tableName: tx_epxseminars_domain_model_category
+        aliasField: 'title'
+        expires: '15d'
+        uniqueConfiguration:
+          fallbackCharacter: '-'
+  TeacherPlugin:
+    type: Extbase
+    limitToPages:
+      - 630
+    extension: EpxSeminars
+    plugin: Seminars
+    routes:
+      -
+        routePath: '/{teacher_title}'
+        _controller: 'Teacher::show'
+        _arguments:
+          teacher_title: teacher
+    defaultController: 'Teacher::show'
+    aspects:
+      teacher_title:
+        type: UniqueAlias
+        tableName: tx_epxseminars_domain_model_teacher
+        aliasField: 'title'
+        expires: '15d'
+        uniqueConfiguration:
+          fallbackCharacter: '-'
