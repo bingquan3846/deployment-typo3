@@ -23,16 +23,15 @@ routes: {  }
 routeEnhancers:
   PageTypeSuffix:
     type: PageType
-    default: '/'
-    index: 'home'
+    default: /
+    index: /
     map:
-      '/': 0
+      /: 0
       sitemap.xml: 1533906435
   DatePlugin:
     type: Extbase
     limitToPages:
       - 551
-      - 539
     extension: EpxSeminars
     plugin: Seminars
     routes:
@@ -42,12 +41,14 @@ routeEnhancers:
         _arguments:
           date_title: date
     defaultController: 'Date::show'
+    requirements:
+      _date: "(?s).*"
     aspects:
       date_title:
         type: UniqueAlias
         tableName: tx_epxseminars_domain_model_date
-        aliasField: 'title'
-        expires: '15d'
+        aliasField: title
+        expires: 15d
         uniqueConfiguration:
           fallbackCharacter: '-'
   SeminarPlugin:
@@ -64,12 +65,14 @@ routeEnhancers:
         _arguments:
           seminar_title: seminar
     defaultController: 'Seminar::show'
+    requirements:
+      _seminar: "(?s).*"
     aspects:
       seminar_title:
         type: UniqueAlias
         tableName: tx_epxseminars_domain_model_seminar
-        aliasField: 'title'
-        expires: '15d'
+        aliasField: title
+        expires: 15d
         uniqueConfiguration:
           fallbackCharacter: '-'
   SeminarListPlugin:
@@ -85,12 +88,14 @@ routeEnhancers:
         _arguments:
           category_title: category
     defaultController: 'Seminar::list'
+    requirements:
+      _category: "(?s).*"
     aspects:
       category_title:
         type: UniqueAlias
         tableName: tx_epxseminars_domain_model_category
-        aliasField: 'title'
-        expires: '15d'
+        aliasField: title
+        expires: 15d
         uniqueConfiguration:
           fallbackCharacter: '-'
   TeacherPlugin:
@@ -106,11 +111,13 @@ routeEnhancers:
         _arguments:
           teacher_title: teacher
     defaultController: 'Teacher::show'
+    requirements:
+      _teacher: "(?s).*"
     aspects:
       teacher_title:
         type: UniqueAlias
         tableName: tx_epxseminars_domain_model_teacher
-        aliasField: 'title'
-        expires: '15d'
+        aliasField: title
+        expires: 15d
         uniqueConfiguration:
           fallbackCharacter: '-'
